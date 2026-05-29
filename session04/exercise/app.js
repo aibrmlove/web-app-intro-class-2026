@@ -27,6 +27,10 @@ const todoList = document.getElementById("todo-list");
 //   3. render() を呼んで画面を再描画
 // ============================================================
 function addTodo(title) {
+  if (title === "") return; // 空文字なら何もしない
+  todos.push({title: title,done: false});
+  render(); // 画面を再描画 
+
   // ヒント:
   //   if (title === "") return;
   //   todos.push({ title: title, done: false });
@@ -76,6 +80,15 @@ function deleteTodo(index) {
 //   4. todoList に li を appendChild
 // ============================================================
 function render() {
+ todoList.innerHTML = ""; // リストを一旦空にする
+
+  todos.forEach((todo) => {
+    const li = document.createElement("li");
+    li.className = "todo-item";
+    li.textContent = todo.title;
+    todoList.appendChild(li);
+  });
+}
   // ステップ1: リストを空にする
   // ステップ2: todosが空の場合の処理
   // ステップ3: todosの各要素を描画
